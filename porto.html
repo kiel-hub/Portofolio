@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio - Kiel Julian Nanggala</title>
+  <style>
+    /* --- STYLES (CSS) --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f7f6;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Profil Card */
+    .profile-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+
+    .profile-img {
+      width: 150px;
+      height: 220px;
+      object-fit: cover;
+      border: 4px solid #4A90E2;
+      margin-bottom: 15px;
+    }
+
+    .profile-card h1 {
+      font-size: 1.8rem;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: #e1f0ff;
+      color: #4A90E2;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .bio-info {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    /* Social / Website Links */
+    .links-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-link {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4A90E2;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-link:hover {
+      background-color: #357ABD;
+    }
+
+    /* Projects Section */
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 8px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    /* Code Block Display */
+    .code-block {
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      margin-bottom: 15px;
+      max-height: 150px;
+    }
+
+    .project-card .btn-link {
+      align-self: flex-start;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <section class="profile-card">
+      <img src="" alt="Foto Profil" class="profile-img" id="user-img">
+      
+      <h1 id="user-name"></h1>
+      <span class="badge" id="user-status"></span>
+      
+      <p class="bio-info">
+        Jenis Kelamin: <strong id="user-gender"></strong>
+      </p>
+
+      <div class="links-container">
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Hasil Karya</h2>
+      
+      <div class="projects-grid" id="projects-container">
+        </div>
+    </section>
+  </div>
+
+  <script>
+    // 1. Data Profil
+    const profileData = {
+      nama: "Kiel Julian Nanggala",
+      jenisKelamin: "Laki-laki",
+      status: "Mahasiswa Teknologi Informasi S1",
+      fotoUrl: "Kiel.jpeg"
+    };
+
+    // 2. Data Project / Output Kode
+    const projectsData = [
+      {
+        judul: "Northern Lights",
+        deskripsi: "Program HTML, CSS, JS yang responsif",
+        bahasa: "HTML, CSS, JS",
+        snippet: `/* Contoh struktur utama Northern Lights */\n<div class="aurora-container">\n  <header class="navbar">...</header>\n  <main class="content">...</main>\n</div>`,
+        link: "https://kiel-hub.github.io/projectwebkiel/"
+      }
+    ];
+
+    // 3. Render Data Profil ke HTML
+    document.getElementById('user-name').innerText = profileData.nama;
+    document.getElementById('user-gender').innerText = profileData.jenisKelamin;
+    document.getElementById('user-status').innerText = profileData.status;
+    document.getElementById('user-img').src = profileData.fotoUrl;
+
+    // 4. Render Data Project ke HTML secara Otomatis
+    const container = document.getElementById('projects-container');
+
+    projectsData.forEach(project => {
+      const snippetContent = project.snippet ? escapeHTML(project.snippet) : 'Kode tidak tersedia';
+      
+      const projectCard = `
+        <div class="project-card">
+          <div>
+            <h3>${project.judul}</h3>
+            <p>${project.deskripsi}</p>
+            <pre class="code-block"><code>${snippetContent}</code></pre>
+          </div>
+          <a href="${project.link}" class="btn-link" target="_blank">Lihat Detail</a>
+        </div>
+      `;
+      container.innerHTML += projectCard;
+    });
+
+    // Helper untuk mencegah karakter HTML tidak sengaja ter-render di code block
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+  </script>
+</body>
+</html>
